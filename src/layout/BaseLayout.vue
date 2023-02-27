@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import HelloWorld from '../components/HelloWorld.vue'
-import { CloseOutlined } from '@vicons/material'
 import { ipcRenderer } from 'electron'
 
 const closeWindow = () => {
@@ -11,9 +10,7 @@ const closeWindow = () => {
   <div>
     <div class="header">
       <div class="btn-tool" @click="() => closeWindow()">
-        <Icon color="white" :size="24" tag="span">
-          <CloseOutlined class="icon" />
-        </Icon>
+        <el-icon class="icon" color="#fff"><Close /></el-icon>
       </div>
     </div>
   </div>
@@ -36,8 +33,20 @@ const closeWindow = () => {
   -webkit-app-region: drag;
   .btn-tool{
     -webkit-app-region: no-drag;
-    background-color: green;
+    // background-color: green;
     width: 40px;
+    height: 100%;
+    line-height: 100%;
+    text-align: center;
+    &:hover{
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .icon{
+      width: 40px;
+      height: 100%;
+      line-height: 100%;
+      text-align: center;
+    }
   }
 }
 .flex-center {

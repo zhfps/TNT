@@ -3,7 +3,7 @@ import { RouteRecordRaw, createWebHistory, createRouter } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'main',
+    name: 'layout',
     component: () => import('../layout/BaseLayout.vue'),
   }
 ]
