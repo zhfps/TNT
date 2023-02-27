@@ -3,6 +3,9 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import electron from 'vite-plugin-electron'
 import renderer from 'vite-plugin-electron-renderer'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import pkg from './package.json'
 
 // https://vitejs.dev/config/
@@ -15,6 +18,12 @@ export default defineConfig(({ command }) => {
   return {
     plugins: [
       vue(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
       electron([
         {
           // Main-Process entry file of the Electron App.
@@ -40,8 +49,6 @@ export default defineConfig(({ command }) => {
         {
           entry: 'electron/preload/index.ts',
           onstart(options) {
-            // Notify the Renderer-Process to reload the page when the Preload-Scripts build is complete, 
-            // instead of restarting the entire Electron App.
             options.reload()
           },
           vite: {
@@ -56,7 +63,6 @@ export default defineConfig(({ command }) => {
           },
         }
       ]),
-      // Use Node.js API in the Renderer-process
       renderer({
         nodeIntegration: true,
       }),

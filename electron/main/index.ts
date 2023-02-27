@@ -45,7 +45,7 @@ async function createWindow() {
     title: 'Main window',
     icon: join(process.env.PUBLIC, 'favicon.ico'),
     //边框
-    frame: true,
+    frame: false,
     //透明
     transparent: false,
     webPreferences: {
@@ -57,8 +57,8 @@ async function createWindow() {
 
   if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
     win.loadURL(url)
-    // Open devTool if the app is not packaged
-    //win.webContents.openDevTools()
+    // 控制太
+    win.webContents.openDevTools()
   } else {
     win.loadFile(indexHtml)
   }
@@ -81,6 +81,7 @@ app.on('window-all-closed', () => {
   win = null
   if (process.platform !== 'darwin') app.quit()
 })
+
 
 app.on('second-instance', () => {
   if (win) {
@@ -114,4 +115,8 @@ ipcMain.handle('open-win', (_, arg) => {
   } else {
     childWindow.loadFile(indexHtml, { hash: arg })
   }
+})
+
+ipcMain.on('close',(_, arg) =>{
+    win.close()
 })
