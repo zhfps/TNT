@@ -9,7 +9,7 @@ import './samples/node-api'
 
 const app =createApp(App)
 const router = userRouter(app)
-      app.use(createPinia)
+      app.use(createPinia())
          .mount('#app')
          .$nextTick(() => {
            postMessage({ payload: 'removeLoading' }, '*')

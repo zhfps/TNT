@@ -73,6 +73,11 @@ async function createWindow() {
     event.preventDefault()
     shell.openExternal(url)
   })
+  win.setMenu(null)
+  // 设置窗口是否可以由用户手动最大化。
+  win.setMaximizable(false)
+  // 设置用户是否可以调节窗口尺寸
+  win.setResizable(false)
 }
 
 app.whenReady().then(createWindow)
@@ -119,4 +124,18 @@ ipcMain.handle('open-win', (_, arg) => {
 
 ipcMain.on('close',(_, arg) =>{
     win.close()
+})
+ipcMain.on('maximize',(_, arg) =>{
+    if(!win.isMaximizable()){
+        win.setResizable(true)
+        win.maximize()
+    }
+})
+
+ipcMain.on('minimize',(_, arg) =>{
+      win.minimize()
+})
+
+ipcMain.on('cancleFullScreen',(_, arg) =>{
+  win.restore()
 })
