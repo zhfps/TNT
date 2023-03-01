@@ -1,8 +1,8 @@
 {
-  "name": "tnt",
+  "name": "infinite",
   "version": "1.0.0",
   "main": "dist-electron/main/index.js",
-  "description": "TNT",
+  "description": "INFINITE",
   "author": "it_dog_zhang@163.com",
   "license": "MIT",
   "private": true,
